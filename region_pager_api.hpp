@@ -23,5 +23,6 @@
 
 #include "lua.hpp"
 
+//TODO: (1) change the following line to remove reference to Tortuga
 #define TORTUGA_REGION_PAGER_API "region_pager"
 LUAMOD_API int openRegionPagerAPI(lua_State* L);
