@@ -28,76 +28,121 @@
 //NOTE: zero indexing is used here, but not in the region API
 
 static int setTile(lua_State* L) {
-	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, 1));
-	int ret = pager->SetTile(lua_tointeger(L, 2), lua_tointeger(L, 3), lua_tointeger(L, 4), lua_tointeger(L, 5));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//set tile
+	int ret = pager->SetTile(lua_tointeger(L, 1), lua_tointeger(L, 2), lua_tointeger(L, 3), lua_tointeger(L, 4));
 	lua_pushinteger(L, ret);
 	return 1;
 }
 
 static int getTile(lua_State* L) {
-	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, 1));
-	int ret = pager->GetTile(lua_tointeger(L, 2), lua_tointeger(L, 3), lua_tointeger(L, 4));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//get tile
+	int ret = pager->GetTile(lua_tointeger(L, 1), lua_tointeger(L, 2), lua_tointeger(L, 3));
 	lua_pushinteger(L, ret);
 	return 1;
 }
 
 static int setSolid(lua_State* L) {
-	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, 1));
-	bool ret = pager->SetSolid(lua_tointeger(L, 2), lua_tointeger(L, 3), lua_toboolean(L, 4));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//set solid
+	bool ret = pager->SetSolid(lua_tointeger(L, 1), lua_tointeger(L, 2), lua_toboolean(L, 3));
 	lua_pushboolean(L, ret);
 	return 1;
 }
 
 static int getSolid(lua_State* L) {
-	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, 1));
-	bool ret = pager->GetSolid(lua_tointeger(L, 2), lua_tointeger(L, 3));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//get solid
+	bool ret = pager->GetSolid(lua_tointeger(L, 1), lua_tointeger(L, 2));
 	lua_pushboolean(L, ret);
 	return 1;
 }
 
 static int getRegion(lua_State* L) {
-	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, 1));
-	Region* region = pager->GetRegion(lua_tointeger(L, 2), lua_tointeger(L, 3));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//get region
+	Region* region = pager->GetRegion(lua_tointeger(L, 1), lua_tointeger(L, 2));
 	lua_pushlightuserdata(L, region);
 	return 1;
 }
 
 static int loadRegion(lua_State* L) {
-	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, 1));
-	Region* region = pager->LoadRegion(lua_tointeger(L, 2), lua_tointeger(L, 3));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//load region
+	Region* region = pager->LoadRegion(lua_tointeger(L, 1), lua_tointeger(L, 2));
 	lua_pushlightuserdata(L, region);
 	return 1;
 }
 
 static int saveRegion(lua_State* L) {
-	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, 1));
-	Region* region = pager->SaveRegion(lua_tointeger(L, 2), lua_tointeger(L, 3));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//save region
+	Region* region = pager->SaveRegion(lua_tointeger(L, 1), lua_tointeger(L, 2));
 	lua_pushlightuserdata(L, region);
 	return 1;
 }
 
 static int createRegion(lua_State* L) {
-	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, 1));
-	Region* region = pager->CreateRegion(lua_tointeger(L, 2), lua_tointeger(L, 3));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//create region
+	Region* region = pager->CreateRegion(lua_tointeger(L, 1), lua_tointeger(L, 2));
 	lua_pushlightuserdata(L, region);
 	return 1;
 }
 
 static int unloadRegion(lua_State* L) {
-	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, 1));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
 
 	//two argument types: coords & the region itself
-	switch(lua_type(L, 2)) {
+	switch(lua_type(L, 1)) {
 		case LUA_TNUMBER:
+			//unload using coords
 			pager->UnloadIf([&](Region const& region) -> bool {
-				int x = lua_tointeger(L, 2);
-				int y = lua_tointeger(L, 3);
+				int x = lua_tointeger(L, 1);
+				int y = lua_tointeger(L, 2);
 				return region.GetX() == x && region.GetY() == y;
 			});
 		break;
 		case LUA_TLIGHTUSERDATA:
+			//unloading using reference
 			pager->UnloadIf([&](Region const& region) -> bool {
-				return (&region) == lua_touserdata(L, 2);
+				return (&region) == lua_touserdata(L, 1);
 			});
 		break;
 	}
@@ -105,28 +150,48 @@ static int unloadRegion(lua_State* L) {
 }
 
 static int setOnLoad(lua_State* L) {
-	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, 1));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//set on load
 	luaL_unref(L, LUA_REGISTRYINDEX, pager->GetLoadReference());
 	pager->SetLoadReference(luaL_ref(L, LUA_REGISTRYINDEX));
 	return 0;
 }
 
 static int setOnSave(lua_State* L) {
-	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, 1));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//set on save
 	luaL_unref(L, LUA_REGISTRYINDEX, pager->GetSaveReference());
 	pager->SetSaveReference(luaL_ref(L, LUA_REGISTRYINDEX));
 	return 0;
 }
 
 static int setOnCreate(lua_State* L) {
-	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, 1));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//set on create
 	luaL_unref(L, LUA_REGISTRYINDEX, pager->GetCreateReference());
 	pager->SetCreateReference(luaL_ref(L, LUA_REGISTRYINDEX));
 	return 0;
 }
 
 static int setOnUnload(lua_State* L) {
-	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, 1));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//set on unload
 	luaL_unref(L, LUA_REGISTRYINDEX, pager->GetUnloadReference());
 	pager->SetUnloadReference(luaL_ref(L, LUA_REGISTRYINDEX));
 	return 0;
@@ -134,7 +199,12 @@ static int setOnUnload(lua_State* L) {
 
 //debugging
 static int containerSize(lua_State* L) {
-	RegionPagerLua* pager = static_cast<RegionPagerLua*>(lua_touserdata(L, 1));
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//push container size
 	lua_pushinteger(L, pager->GetContainer()->size());
 	return 1;
 }

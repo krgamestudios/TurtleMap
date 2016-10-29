@@ -23,5 +23,5 @@
 
 #include "lua.hpp"
 
-#define TORTUGA_REGION_API "region"
+#define TURTLEMAP_REGION_API "region"
 LUAMOD_API int openRegionAPI(lua_State* L);

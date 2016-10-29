@@ -23,6 +23,7 @@
 
 #include "lua.hpp"
 
-#define REGION_PAGER_NAME "_regionPager"
-#define TURTLEMAP_REGION_PAGER_API "region_pager"
-LUAMOD_API int openRegionPagerAPI(lua_State* L);
+#define RENDERER_NAME "_renderer"
+#define TILESHEET_NAME "_tilesheet"
+#define TURTLEMAP_TILE_SHEET_API "tile_sheet"
+LUAMOD_API int openTileSheetAPI(lua_State* L);
