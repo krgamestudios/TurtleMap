@@ -101,6 +101,10 @@ void RegionPagerBase::UnloadAll() {
 	regionList.clear();
 }
 
+void RegionPagerBase::ForEach(std::function<void(Region&)> fn) {
+	std::for_each(regionList.begin(), regionList.end(), fn);
+}
+
 std::list<Region>* RegionPagerBase::GetContainer() {
 	return &regionList;
 }

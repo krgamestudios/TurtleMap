@@ -51,6 +51,8 @@ public:
 	virtual void UnloadIf(std::function<bool(Region const&)> fn);
 	virtual void UnloadAll();
 
+	virtual void ForEach(std::function<void(Region&)> fn);
+
 	//accessors & mutators
 	std::list<Region>* GetContainer();
 protected:

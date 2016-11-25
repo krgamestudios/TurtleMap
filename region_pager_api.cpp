@@ -24,6 +24,8 @@
 #include "region_pager_lua.hpp"
 #include "region.hpp"
 
+#include <stdexcept>
+
 //DOCS: These glue functions simply wrap RegionPagerLua's methods
 //NOTE: zero indexing is used here, but not in the region API
 
@@ -197,6 +199,26 @@ static int setOnUnload(lua_State* L) {
 	return 0;
 }
 
+static int forEach(lua_State* L) {
+	//get the global pager
+	lua_getglobal(L, REGION_PAGER_NAME);
+	RegionPagerLua* pager = reinterpret_cast<RegionPagerLua*>(lua_touserdata(L, -1));
+	lua_pop(L, 1);
+
+	//run the given closure on each region
+	pager->ForEach([L](Region& r) -> void {
+		lua_pushvalue(L, 1); //copy the closure passed
+		lua_pushlightuserdata(L, &r); //push this region
+
+		//call the function, catching any errors
+		if (lua_pcall(L, 1, 0, 0)) {
+			throw(std::runtime_error( lua_tostring(L, -1) ));
+		}
+	});
+
+	return 0;
+}
+
 //debugging
 static int containerSize(lua_State* L) {
 	//get the global pager
@@ -228,6 +250,8 @@ static const luaL_Reg regionPagerLib[] = {
 	{"SetOnSave",setOnSave},
 	{"SetOnCreate",setOnCreate},
 	{"SetOnUnload",setOnUnload},
+
+	{"ForEach", forEach},
 
 	//debugging
 	{"ContainerSize", containerSize},
