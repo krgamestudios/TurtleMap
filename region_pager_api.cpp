@@ -147,7 +147,17 @@ static int unloadRegion(lua_State* L) {
 				return (&region) == lua_touserdata(L, -1);
 			});
 		break;
+		//TODO: callback
 	}
+	return 0;
+}
+
+static int unloadAll(lua_State* L) {
+	//get the pager
+	RegionPagerLua* pager = getPager(L);
+
+	pager->UnloadAll();
+
 	return 0;
 }
 
@@ -232,6 +242,7 @@ static const luaL_Reg regionPagerLib[] = {
 	{"SaveRegion", saveRegion},
 	{"CreateRegion", createRegion},
 	{"UnloadRegion", unloadRegion},
+	{"UnloadAll", unloadAll},
 
 	//triggers
 	{"SetOnLoad",setOnLoad},
